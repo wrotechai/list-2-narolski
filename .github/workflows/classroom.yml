@@ -1,0 +1,145 @@
+name: Autograding Tests
+on:
+  - push
+  - workflow_dispatch
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: T1 Output Format
+        id: t1-output-format
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T1_OUTPUT_FORMAT — Valid output format (board + summary + stderr)"
+          setup-command: chmod +x run_game.sh
+          command: python3 tests/autograder.py T1_OUTPUT_FORMAT
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T2 Minimax Game
+        id: t2-minimax-game
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T2_MINIMAX_GAME — Minimax produces a valid game"
+          command: python3 tests/autograder.py T2_MINIMAX_GAME
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T3 Alphabeta Game
+        id: t3-alphabeta-game
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T3_ALPHABETA_GAME — Alpha-beta produces a valid game"
+          command: python3 tests/autograder.py T3_ALPHABETA_GAME
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T4 Pruning
+        id: t4-pruning
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T4_PRUNING — Alpha-beta visits fewer nodes than Minimax"
+          command: python3 tests/autograder.py T4_PRUNING
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 10
+          max-score: 5
+
+      - name: T5 Endgame
+        id: t5-endgame
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T5_ENDGAME — Forced win detected (B wins in 1 round)"
+          command: python3 tests/autograder.py T5_ENDGAME
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T6 Capture
+        id: t6-capture
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T6_CAPTURE — Diagonal capture mechanic works"
+          command: python3 tests/autograder.py T6_CAPTURE
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 4
+
+      - name: T7 Heuristic 2
+        id: t7-heuristic-2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T7_HEURISTIC_2 — Heuristic 2 produces a valid game"
+          command: python3 tests/autograder.py T7_HEURISTIC_2
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T8 Heuristic 3
+        id: t8-heuristic-3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T8_HEURISTIC_3 — Heuristic 3 produces a valid game"
+          command: python3 tests/autograder.py T8_HEURISTIC_3
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 5
+          max-score: 5
+
+      - name: T9 Depth Effect
+        id: t9-depth-effect
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "T9_DEPTH_EFFECT — Deeper search visits more nodes"
+          command: python3 tests/autograder.py T9_DEPTH_EFFECT
+          input: ""
+          expected-output: ""
+          comparison-method: included
+          timeout: 10
+          max-score: 5
+
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          T1-OUTPUT-FORMAT_RESULTS: "${{ steps.t1-output-format.outputs.result }}"
+          T2-MINIMAX-GAME_RESULTS: "${{ steps.t2-minimax-game.outputs.result }}"
+          T3-ALPHABETA-GAME_RESULTS: "${{ steps.t3-alphabeta-game.outputs.result }}"
+          T4-PRUNING_RESULTS: "${{ steps.t4-pruning.outputs.result }}"
+          T5-ENDGAME_RESULTS: "${{ steps.t5-endgame.outputs.result }}"
+          T6-CAPTURE_RESULTS: "${{ steps.t6-capture.outputs.result }}"
+          T7-HEURISTIC-2_RESULTS: "${{ steps.t7-heuristic-2.outputs.result }}"
+          T8-HEURISTIC-3_RESULTS: "${{ steps.t8-heuristic-3.outputs.result }}"
+          T9-DEPTH-EFFECT_RESULTS: "${{ steps.t9-depth-effect.outputs.result }}"
+        with:
+          runners: t1-output-format,t2-minimax-game,t3-alphabeta-game,t4-pruning,t5-endgame,t6-capture,t7-heuristic-2,t8-heuristic-3,t9-depth-effect

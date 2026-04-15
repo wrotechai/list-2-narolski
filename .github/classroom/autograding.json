@@ -1,0 +1,94 @@
+{
+  "tests": [
+    {
+      "name": "T1_OUTPUT_FORMAT — Valid output format (board + summary + stderr)",
+      "setup": "chmod +x run_game.sh",
+      "run": "python3 tests/autograder.py T1_OUTPUT_FORMAT",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T2_MINIMAX_GAME — Minimax produces a valid game",
+      "setup": "",
+      "run": "python3 tests/autograder.py T2_MINIMAX_GAME",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T3_ALPHABETA_GAME — Alpha-beta produces a valid game",
+      "setup": "",
+      "run": "python3 tests/autograder.py T3_ALPHABETA_GAME",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T4_PRUNING — Alpha-beta visits fewer nodes than Minimax",
+      "setup": "",
+      "run": "python3 tests/autograder.py T4_PRUNING",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 600,
+      "points": 5
+    },
+    {
+      "name": "T5_ENDGAME — Forced win detected (B wins in 1 round)",
+      "setup": "",
+      "run": "python3 tests/autograder.py T5_ENDGAME",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T6_CAPTURE — Diagonal capture mechanic works",
+      "setup": "",
+      "run": "python3 tests/autograder.py T6_CAPTURE",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 4
+    },
+    {
+      "name": "T7_HEURISTIC_2 — Heuristic 2 produces a valid game",
+      "setup": "",
+      "run": "python3 tests/autograder.py T7_HEURISTIC_2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T8_HEURISTIC_3 — Heuristic 3 produces a valid game",
+      "setup": "",
+      "run": "python3 tests/autograder.py T8_HEURISTIC_3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 300,
+      "points": 5
+    },
+    {
+      "name": "T9_DEPTH_EFFECT — Deeper search visits more nodes",
+      "setup": "",
+      "run": "python3 tests/autograder.py T9_DEPTH_EFFECT",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 600,
+      "points": 5
+    }
+  ]
+}
