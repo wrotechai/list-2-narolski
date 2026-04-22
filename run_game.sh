@@ -31,4 +31,5 @@
 #   java -jar solution.jar "$1" "$2" "$3"
 # ============================================================================
 
+python3 main.py --algorithm $1
 python3 solution.py "$1" "$2" "$3"
